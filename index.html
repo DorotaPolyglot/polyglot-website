@@ -71,5 +71,276 @@ window.addEventListener('message', function (event) {
 });
 </script>
 
+
+<!-- Polyglot: aktualizacja opinii + poprawka mobilna -->
+<style>
+  .polyglot-testimonial-grid {
+    display: grid !important;
+    grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+    align-items: stretch;
+    gap: 18px;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+  .polyglot-testimonial-grid .testimonial-card {
+    display: flex !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .polyglot-testimonial-grid .testimonial-card > p {
+    width: 100%;
+    max-width: none;
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+  .polyglot-testimonial-grid .testimonial-card small {
+    color: var(--muted) !important;
+  }
+  .polyglot-testimonial-grid .testimonial-card[hidden] {
+    display: none !important;
+  }
+  .polyglot-testimonial-controls {
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-top: 28px;
+    display: flex;
+  }
+  .polyglot-testimonial-controls button {
+    border: 1px solid var(--line);
+    width: 42px;
+    height: 42px;
+    color: var(--primary-hover);
+    background: #fff;
+    border-radius: 50%;
+    place-items: center;
+    cursor: pointer;
+    display: grid;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .polyglot-testimonial-controls button:hover {
+    border-color: var(--primary);
+    background: var(--primary-wash);
+  }
+  .polyglot-testimonial-dots {
+    align-items: center;
+    gap: 7px;
+    display: flex;
+  }
+  .polyglot-testimonial-dots span {
+    background: var(--line);
+    border-radius: 50%;
+    width: 6px;
+    height: 6px;
+    display: block;
+  }
+  .polyglot-testimonial-dots span.is-active {
+    background: var(--primary);
+    border-radius: 999px;
+    width: 18px;
+  }
+  @media (max-width: 1180px) {
+    .polyglot-testimonial-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+    }
+  }
+  @media (max-width: 780px) {
+    .testimonials {
+      padding-left: 22px !important;
+      padding-right: 22px !important;
+    }
+    .polyglot-testimonial-grid {
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    .polyglot-testimonial-grid .testimonial-card {
+      grid-column: 1 / -1 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      padding: 22px 20px !important;
+    }
+    .polyglot-testimonial-grid .testimonial-card > p {
+      width: 100% !important;
+      max-width: none !important;
+      font-size: 13.5px !important;
+      line-height: 1.75 !important;
+    }
+  }
+</style>
+<script>
+(function () {
+  const NEW_REVIEWS = [
+{name:'Marlena Paech',role:'Menedżer • bankowość',initials:'MP',text:'Bardzo polecam lekcje z Dorotą. Jest zawsze świetnie przygotowana i dostosowuje zajęcia do moich potrzeb. Odkąd zaczęłam uczęszczać na lekcje, widzę ogromny postęp w swoim angielskim i z każdych zajęć wynoszę naprawdę dużo. Dodatkowym plusem jest fantastyczna, luźna atmosfera. Zajęcia bardziej przypominają miłe spotkanie niż typową lekcję, dzięki czemu nauka jest przyjemna i całkowicie bezstresowa. Zdecydowanie polecam każdemu, kto chce rozwijać swój angielski w świetnej atmosferze.'},
+{name:'Maja Piwińska',role:'Specjalista ds. ekonomicznych • branża budowlana',initials:'MP',text:'Jestem bardzo zadowolona z zajęć z języka angielskiego. Pracuję jako specjalista ds. ekonomicznych w korporacji z branży budowlanej i zależało mi na rozwinięciu umiejętności językowych, które wykorzystuję w pracy, ale również na poszerzeniu wiedzy językowej oraz swobodnym komunikowaniu się. Zajęcia są ciekawe, prowadzone w miłej atmosferze i dopasowane do moich potrzeb. Widzę wyraźne postępy i czuję się coraz swobodniej w komunikacji po angielsku, zarówno biznesowo, jak i prywatnie. Zdecydowanie polecam!'},
+{name:'Izabela W.',role:'Obsługa klienta niemieckojęzycznego',initials:'IW',text:'Każde zajęcia są starannie i sumiennie przygotowane. Za każdym razem zwiększa się pula nowego słownictwa, pojawiają się ciekawe tematy do dyskusji i pytania, dzięki którym możemy się też lepiej poznać podczas zajęć. Atmosfera jest swobodna i pozytywna, więc jeśli ktokolwiek ma obawy przed mówieniem, zapewniam, że znikają one zaraz po pierwszych zajęciach :-) Z czystym sumieniem polecam. Jest to wartościowa inwestycja w siebie i motywacja do działania, żeby jeszcze lepiej posługiwać się tym językiem. Prowadząca jest cierpliwa i w razie potrzeby wytłumaczy wszystko, co może być nie do końca jasne. Bardzo polecam! 🥰'},
+{name:'Dorota G.',role:'Księgowa',initials:'DG',text:'Dorota to świetny motywator do nauki angielskiego. Rozpoczynając z nią lekcje, pomogła mi od razu przełamać barierę w mówieniu po angielsku. Na zajęcia jest zawsze świetnie przygotowana, ma gotowe materiały do przeprowadzenia lekcji. Zawsze jest skupiona na uczniu i posiada nieskończone pokłady cierpliwości.'}
+];
+
+  const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+
+  function makeCard(review) {
+    const article = document.createElement('article');
+    article.className = 'testimonial-card card';
+    const p = document.createElement('p');
+    p.textContent = review.text;
+    const footer = document.createElement('footer');
+    const initials = document.createElement('span');
+    initials.className = 'initials';
+    initials.textContent = review.initials;
+    const meta = document.createElement('div');
+    const strong = document.createElement('strong');
+    strong.textContent = review.name;
+    const small = document.createElement('small');
+    small.textContent = review.role;
+    meta.append(strong, small);
+    footer.append(initials, meta);
+    article.append(p, footer);
+    return article;
+  }
+
+  async function findGretaCard(section, originalGrid, originalControls) {
+    const find = () => Array.from(originalGrid.querySelectorAll('.testimonial-card'))
+      .find(card => /greta/i.test(card.textContent || ''));
+
+    let found = find();
+    if (found) return found.cloneNode(true);
+
+    const buttons = originalControls ? originalControls.querySelectorAll('button') : [];
+    const nextButton = buttons.length ? buttons[buttons.length - 1] : null;
+    if (!nextButton) return null;
+
+    const seen = new Set();
+    for (let i = 0; i < 10; i++) {
+      const signature = (originalGrid.innerText || '').trim();
+      if (seen.has(signature)) break;
+      seen.add(signature);
+      nextButton.click();
+      await delay(160);
+      found = find();
+      if (found) return found.cloneNode(true);
+    }
+    return null;
+  }
+
+  async function initTestimonials() {
+    const section = document.querySelector('.testimonials');
+    if (!section || section.dataset.polyglotUpdated === '1') return false;
+
+    const originalGrid = section.querySelector('.testimonial-grid');
+    if (!originalGrid) return false;
+    const originalControls = section.querySelector('.slider-controls');
+
+    const gretaCard = await findGretaCard(section, originalGrid, originalControls);
+    if (!gretaCard) {
+      console.warn('Polyglot: nie znaleziono opinii Grety — pozostawiam oryginalną sekcję bez zmian.');
+      return true;
+    }
+
+    section.dataset.polyglotUpdated = '1';
+
+    const customGrid = document.createElement('div');
+    customGrid.className = 'polyglot-testimonial-grid';
+
+    /* Greta zostaje dokładnie taka, jak w obecnej wersji strony. */
+    customGrid.appendChild(makeCard(NEW_REVIEWS[0]));
+    customGrid.appendChild(gretaCard);
+    NEW_REVIEWS.slice(1).forEach(review => customGrid.appendChild(makeCard(review)));
+
+    const controls = document.createElement('div');
+    controls.className = 'polyglot-testimonial-controls';
+
+    const prev = document.createElement('button');
+    prev.type = 'button';
+    prev.setAttribute('aria-label', 'Poprzednie opinie');
+    prev.textContent = '‹';
+
+    const dots = document.createElement('div');
+    dots.className = 'polyglot-testimonial-dots';
+
+    const next = document.createElement('button');
+    next.type = 'button';
+    next.setAttribute('aria-label', 'Następne opinie');
+    next.textContent = '›';
+
+    controls.append(prev, dots, next);
+
+    originalGrid.style.display = 'none';
+    if (originalControls) originalControls.style.display = 'none';
+    originalGrid.insertAdjacentElement('afterend', customGrid);
+    customGrid.insertAdjacentElement('afterend', controls);
+
+    let page = 0;
+
+    function perPage() {
+      if (window.innerWidth <= 780) return 1;
+      if (window.innerWidth <= 1180) return 2;
+      return 3;
+    }
+
+    function render() {
+      const cards = Array.from(customGrid.children);
+      const per = perPage();
+      const totalPages = Math.max(1, Math.ceil(cards.length / per));
+      if (page >= totalPages) page = totalPages - 1;
+
+      cards.forEach((card, i) => {
+        card.hidden = !(i >= page * per && i < (page + 1) * per);
+      });
+
+      dots.innerHTML = '';
+      for (let i = 0; i < totalPages; i++) {
+        const dot = document.createElement('span');
+        if (i === page) dot.classList.add('is-active');
+        dots.appendChild(dot);
+      }
+
+      prev.disabled = totalPages <= 1;
+      next.disabled = totalPages <= 1;
+    }
+
+    prev.addEventListener('click', () => {
+      const total = Math.ceil(customGrid.children.length / perPage());
+      page = (page - 1 + total) % total;
+      render();
+    });
+
+    next.addEventListener('click', () => {
+      const total = Math.ceil(customGrid.children.length / perPage());
+      page = (page + 1) % total;
+      render();
+    });
+
+    let lastPer = perPage();
+    window.addEventListener('resize', () => {
+      const now = perPage();
+      if (now !== lastPer) {
+        lastPer = now;
+        page = 0;
+        render();
+      }
+    });
+
+    render();
+    return true;
+  }
+
+  let attempts = 0;
+  const timer = setInterval(async () => {
+    attempts++;
+    const done = await initTestimonials();
+    if (done || attempts > 80) clearInterval(timer);
+  }, 150);
+})();
+</script>
+<!-- /Polyglot: aktualizacja opinii + poprawka mobilna -->
+
 </body>
 </html>
