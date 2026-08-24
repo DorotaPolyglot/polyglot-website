@@ -826,7 +826,7 @@ html, body {
 
 
                       <!-- input -->
-                      <input aria-label="email" aria-required="true" type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="E-mail" autocomplete="email">
+                      <input aria-label="email" aria-required="true" required type="email" class="form-control" data-inputmask="" name="fields[email]" placeholder="E-mail" autocomplete="email">
                       <!-- /input -->
 
                       <!-- textarea -->
@@ -865,7 +865,7 @@ html, body {
                       <!-- /input -->
 
                       <!-- textarea -->
-                      <textarea class="form-control" name="fields[wiadomosc]" aria-label="wiadomosc" aria-required="true" maxlength="1024" placeholder="Wiadomość"></textarea>
+                      <textarea class="form-control" name="fields[wiadomosc]" aria-label="wiadomosc" aria-required="true" required maxlength="1024" placeholder="Wiadomość"></textarea>
                       <!-- /textarea -->
 
                       <!-- select -->
@@ -912,6 +912,11 @@ html, body {
 
               
               <input type="hidden" name="ml-submit" value="1">
+
+              <p style="margin: 0 0 14px; color: #71686a; font-size: 11px; line-height: 1.55;">
+                Wysyłając formularz, potwierdzasz zapoznanie się z
+                <a href="/dokumenty/polityka-prywatnosci.pdf" target="_blank" rel="noreferrer">Polityką prywatności</a>.
+              </p>
 
               <div class="ml-form-embedSubmit">
                 

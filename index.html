@@ -78,8 +78,8 @@ window.addEventListener('message', function (event) {
 <!-- Polyglot: opinie FINAL mobile fix -->
 <style>
   /* Oryginalny slider chowamy całkowicie po zbudowaniu nowej sekcji */
-  .testimonials.polyglot-ready > .testimonial-grid,
-  .testimonials.polyglot-ready > .slider-controls {
+  .testimonials.polyglot-ready .testimonial-grid,
+  .testimonials.polyglot-ready .slider-controls {
     display: none !important;
   }
 
@@ -184,6 +184,14 @@ window.addEventListener('message', function (event) {
     width: 18px;
   }
 
+  .polyglot-review-count {
+    min-width: 42px;
+    color: var(--muted);
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
   @media (max-width: 1180px) {
     .polyglot-reviews-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
@@ -195,6 +203,7 @@ window.addEventListener('message', function (event) {
       padding-left: 22px !important;
       padding-right: 22px !important;
       overflow: hidden !important;
+      overflow-anchor: none;
     }
 
     .polyglot-reviews-grid {
@@ -225,6 +234,10 @@ window.addEventListener('message', function (event) {
       overflow-wrap: break-word !important;
       word-break: normal !important;
       white-space: normal !important;
+    }
+
+    .polyglot-reviews-grid {
+      scroll-margin-top: 92px;
     }
   }
 </style>
@@ -262,7 +275,10 @@ window.addEventListener('message', function (event) {
 
   async function captureGreta(section, originalGrid, originalControls) {
     const findGreta = () => Array.from(originalGrid.querySelectorAll('.testimonial-card'))
-      .find(card => /greta/i.test(card.textContent || ''));
+      .find(card => {
+        const signature = card.querySelector('strong')?.textContent.trim();
+        return signature === 'G.S.';
+      });
 
     let card = findGreta();
     if (card) return card.cloneNode(true);
@@ -343,12 +359,16 @@ window.addEventListener('message', function (event) {
     const dots = document.createElement('div');
     dots.className = 'polyglot-review-dots';
 
+    const count = document.createElement('span');
+    count.className = 'polyglot-review-count';
+    count.setAttribute('aria-live', 'polite');
+
     const next = document.createElement('button');
     next.type = 'button';
     next.setAttribute('aria-label', 'Następne opinie');
     next.textContent = '›';
 
-    controls.append(prev, dots, next);
+    controls.append(prev, dots, count, next);
 
     originalGrid.insertAdjacentElement('afterend', grid);
     grid.insertAdjacentElement('afterend', controls);
@@ -382,18 +402,27 @@ window.addEventListener('message', function (event) {
         if (i === page) dot.classList.add('is-active');
         dots.appendChild(dot);
       }
+
+      count.textContent = `${page + 1} / ${totalPages}`;
+    }
+
+    function showCurrentPage() {
+      render();
+      if (window.innerWidth <= 780) {
+        grid.scrollIntoView({ block: 'start', behavior: 'smooth' });
+      }
     }
 
     prev.addEventListener('click', () => {
       const total = Math.ceil(grid.children.length / perPage());
       page = (page - 1 + total) % total;
-      render();
+      showCurrentPage();
     });
 
     next.addEventListener('click', () => {
       const total = Math.ceil(grid.children.length / perPage());
       page = (page + 1) % total;
-      render();
+      showCurrentPage();
     });
 
     let lastPer = perPage();
@@ -419,6 +448,45 @@ window.addEventListener('message', function (event) {
 })();
 </script>
 <!-- /Polyglot: opinie FINAL mobile fix -->
+
+<style>
+  .offer-card .offer-card-contact-link {
+    color: var(--primary-hover);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-top: auto;
+  }
+
+  .offer-card .offer-card-contact-link:hover {
+    color: var(--primary);
+    text-decoration: underline;
+  }
+</style>
+<script>
+(function () {
+  function addOfferLinks() {
+    var cards = Array.from(document.querySelectorAll('.offer-card'));
+    if (!cards.length) return false;
+    cards.forEach(function (card) {
+      if (card.querySelector('.offer-card-contact-link')) return;
+      var link = document.createElement('a');
+      link.className = 'offer-card-contact-link';
+      link.href = '#kontakt';
+      link.textContent = 'Zapytaj o zajęcia →';
+      card.appendChild(link);
+    });
+    return true;
+  }
+
+  var attempts = 0;
+  var timer = setInterval(function () {
+    attempts += 1;
+    if (addOfferLinks() || attempts > 100) clearInterval(timer);
+  }, 50);
+})();
+</script>
 
 </body>
 </html>

@@ -4,16 +4,16 @@
     
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Polyglot — angielski online dla dorosłych i młodzieży</title>
+    <title>Cennik lekcji angielskiego online | Polyglot</title>
     
     <meta name="author" content="Dorota Jędruszek — Polyglot Centrum Języków Obcych" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#B21F55" />
-    <link rel="canonical" href="https://polyglotcentrum.pl/" />
+    <link rel="canonical" href="https://polyglotcentrum.pl/cennik.html" />
 <meta property="og:type" content="website" />
     <meta property="og:locale" content="pl_PL" />
     <meta property="og:site_name" content="Polyglot Centrum Języków Obcych" />
-    <meta property="og:url" content="https://polyglotcentrum.pl/" />
+    <meta property="og:url" content="https://polyglotcentrum.pl/cennik.html" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Polyglot — Mówmy wspólnym językiem" />
@@ -71,5 +71,27 @@ window.addEventListener('message', function (event) {
 });
 </script>
 
+<script>
+(function () {
+  function updatePrice() {
+    var cards = Array.from(document.querySelectorAll('.pricing-card'));
+    var card = cards.find(function (item) {
+      return item.querySelector('h2')?.textContent.trim() === '55 minut';
+    });
+    var price = card?.querySelector('.pricing-value');
+    if (!price) return false;
+    var suffix = price.querySelector('small');
+    price.firstChild.textContent = '130 zł';
+    if (suffix) price.appendChild(suffix);
+    return true;
+  }
+
+  var attempts = 0;
+  var timer = setInterval(function () {
+    attempts += 1;
+    if (updatePrice() || attempts > 100) clearInterval(timer);
+  }, 50);
+})();
+</script>
 </body>
 </html>
