@@ -1,0 +1,34 @@
+RewriteEngine On
+ErrorDocument 404 /404.html
+
+# Preserve the privacy-policy address already used by the MailerLite form.
+RewriteRule ^polityka-prywatnosci/?$ /dokumenty/polityka-prywatnosci.pdf [R=301,L]
+
+# Keep real files and directories available.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Canonical addresses for the generated subpages.
+RewriteRule ^(studio|cennik)$ $1/ [R=301,L]
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/css text/javascript application/javascript application/json application/xml image/svg+xml
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType application/pdf "access plus 1 month"
+</IfModule>
