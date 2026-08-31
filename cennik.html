@@ -1,28 +1,22 @@
 <!doctype html>
 <html lang="pl">
   <head>
-    
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cennik lekcji angielskiego online | Polyglot</title>
-    
     <meta name="author" content="Dorota Jędruszek — Polyglot Centrum Języków Obcych" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#B21F55" />
     <link rel="canonical" href="https://polyglotcentrum.pl/cennik.html" />
-<meta property="og:type" content="website" />
+    <meta property="og:type" content="website" />
     <meta property="og:locale" content="pl_PL" />
     <meta property="og:site_name" content="Polyglot Centrum Języków Obcych" />
     <meta property="og:url" content="https://polyglotcentrum.pl/cennik.html" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Polyglot — Mówmy wspólnym językiem" />
-
     <meta name="twitter:title" content="Polyglot — mówmy wspólnym językiem" />
-    <meta
-      name="twitter:description"
-      content="Angielski online dla dorosłych i młodzieży. Praktycznie, spokojnie i bez presji."
-    />
+    <meta name="twitter:description" content="Angielski online dla dorosłych i młodzieży. Praktycznie, spokojnie i bez presji." />
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -31,10 +25,7 @@
         "url": "https://polyglotcentrum.pl/",
         "logo": "https://polyglotcentrum.pl/brand/polyglot-logo.png",
         "description": "Angielski online dla dorosłych i młodzieży. Zajęcia indywidualne i w parach, przygotowanie do egzaminów oraz oferta dla firm.",
-        "founder": {
-          "@type": "Person",
-          "name": "Dorota Jędruszek"
-        },
+        "founder": { "@type": "Person", "name": "Dorota Jędruszek" },
         "email": "kontakt@polyglotcentrum.pl",
         "sameAs": [
           "https://www.facebook.com/polyglotcentrum",
@@ -44,54 +35,121 @@
         "availableLanguage": ["pl", "en"]
       }
     </script>
-    <meta name="description" content="Angielski online dla dorosłych i młodzieży. Zajęcia indywidualne i w parach, przygotowanie do egzaminów oraz oferta dla firm — spokojnie, praktycznie i bez presji.">
-    <link rel="icon" href="/favicon.png">
-    <meta property="og:title" content="Polyglot — angielski online dla dorosłych i młodzieży">
-    <meta property="og:description" content="Angielski online dla dorosłych i młodzieży. Zajęcia indywidualne i w parach, przygotowanie do egzaminów oraz oferta dla firm — spokojnie, praktycznie i bez presji.">
-    <meta property="og:image" content="https://polyglotcentrum.pl/brand/polyglot-social.png">
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://polyglotcentrum.pl/brand/polyglot-social.png">
+    <meta name="description" content="Angielski online dla dorosłych i młodzieży. Zajęcia indywidualne i w parach, przygotowanie do egzaminów oraz oferta dla firm — spokojnie, praktycznie i bez presji." />
+    <link rel="icon" href="/favicon.png" />
+    <meta property="og:title" content="Polyglot — angielski online dla dorosłych i młodzieży" />
+    <meta property="og:description" content="Angielski online dla dorosłych i młodzieży. Zajęcia indywidualne i w parach, przygotowanie do egzaminów oraz oferta dla firm — spokojnie, praktycznie i bez presji." />
+    <meta property="og:image" content="https://polyglotcentrum.pl/brand/polyglot-social.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://polyglotcentrum.pl/brand/polyglot-social.png" />
     <script type="module" crossorigin src="/assets/index-BOfiq2GM.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-D0Qa_RZ6.css">
+    <link rel="stylesheet" crossorigin href="/assets/index-D0Qa_RZ6.css" />
   </head>
   <body>
-    
     <div id="root"></div>
-    
-  
-<script>
-window.addEventListener('message', function (event) {
-  if (!event.data || event.data.type !== 'polyglot-form-height') return;
-  var frames = document.querySelectorAll('iframe.polyglot-form-frame');
-  frames.forEach(function (frame) {
-    if (frame.contentWindow === event.source && event.data.height) {
-      frame.style.height = Math.max(220, Number(event.data.height)) + 'px';
-    }
-  });
-});
-</script>
 
-<script>
-(function () {
-  function updatePrice() {
-    var cards = Array.from(document.querySelectorAll('.pricing-card'));
-    var card = cards.find(function (item) {
-      return item.querySelector('h2')?.textContent.trim() === '55 minut';
-    });
-    var price = card?.querySelector('.pricing-value');
-    if (!price) return false;
-    var suffix = price.querySelector('small');
-    price.firstChild.textContent = '130 zł';
-    if (suffix) price.appendChild(suffix);
-    return true;
-  }
+    <script>
+      window.addEventListener('message', function (event) {
+        if (!event.data || event.data.type !== 'polyglot-form-height') return;
+        var frames = document.querySelectorAll('iframe.polyglot-form-frame');
+        frames.forEach(function (frame) {
+          if (frame.contentWindow === event.source && event.data.height) {
+            frame.style.height = Math.max(220, Number(event.data.height)) + 'px';
+          }
+        });
+      });
+    </script>
 
-  var attempts = 0;
-  var timer = setInterval(function () {
-    attempts += 1;
-    if (updatePrice() || attempts > 100) clearInterval(timer);
-  }, 50);
-})();
-</script>
-</body>
+    <script>
+      (function () {
+        var attempts = 0;
+
+        function updatePricing() {
+          var options = document.querySelector('.pricing-options');
+          if (!options) return false;
+
+          var sourceCard = options.querySelector('.pricing-card-featured') || options.querySelector('.pricing-card');
+          if (!sourceCard) return false;
+
+          function createCard(data) {
+            var card = sourceCard.cloneNode(true);
+            card.className = data.featured ? 'pricing-card pricing-card-featured' : 'pricing-card';
+            var badge = card.querySelector('.pricing-badge');
+
+            if (data.featured) {
+              if (!badge) {
+                badge = document.createElement('span');
+                badge.className = 'pricing-badge';
+                card.insertBefore(badge, card.firstChild);
+              }
+              badge.textContent = 'NAJCZĘŚCIEJ WYBIERANA';
+            } else if (badge) {
+              badge.remove();
+            }
+
+            card.querySelector('.pricing-label').textContent = data.label;
+            card.querySelector('h2').textContent = data.duration;
+
+            var price = card.querySelector('.pricing-value');
+            price.innerHTML = '';
+            price.appendChild(document.createTextNode(data.price));
+            var suffix = document.createElement('small');
+            suffix.textContent = data.suffix;
+            price.appendChild(suffix);
+
+            card.querySelector('.pricing-card > p:not(.pricing-label)').textContent = data.description;
+            var buttonText = card.querySelector('.button span');
+            if (buttonText) buttonText.textContent = data.button;
+            return card;
+          }
+
+          var cards = [
+            {
+              label: 'Zajęcia indywidualne', duration: '55 min', price: '130 zł', suffix: ' / spotkanie',
+              description: 'Indywidualne zajęcia online dopasowane do Twojego poziomu, potrzeb i celów. Pracujemy w Twoim tempie, koncentrując się na praktycznym wykorzystaniu języka i swobodnej komunikacji.',
+              button: 'ZAPYTAJ O WOLNY TERMIN', featured: true
+            },
+            {
+              label: 'Zajęcia w parze', duration: '55 min', price: '80 zł', suffix: ' / osoba / spotkanie',
+              description: 'Zajęcia online dla dwóch osób na podobnym poziomie zaawansowania. Dużo praktycznej komunikacji, wspólnej pracy i możliwość nauki z wybraną przez siebie osobą.',
+              button: 'ZAPYTAJ O ZAJĘCIA W PARZE', featured: false
+            },
+            {
+              label: 'Pierwsze spotkanie', duration: '30 min', price: '60 zł', suffix: ' / spotkanie',
+              description: 'Pierwsze spotkanie ma formę krótkiej konsultacji. Poznamy Twój poziom, potrzeby i cele, porozmawiamy o sposobie prowadzenia zajęć oraz dobierzemy odpowiednie materiały i plan nauki.',
+              button: 'UMÓW PIERWSZE SPOTKANIE', featured: false
+            }
+          ];
+
+          options.innerHTML = '';
+          cards.forEach(function (data) { options.appendChild(createCard(data)); });
+
+          var additional = document.querySelector('.pricing-additional');
+          if (additional) additional.remove();
+
+          if (!document.querySelector('.pricing-terms')) {
+            var terms = document.createElement('p');
+            terms.className = 'pricing-terms';
+            terms.textContent = 'W przypadku kursów realizowanych w ramach indywidualnie ustalonych pakietów lub finansowanych przez firmy warunki mogą być ustalane odrębnie.';
+            var note = document.querySelector('.pricing-note');
+            if (note) note.parentNode.insertBefore(terms, note);
+          }
+
+          if (!document.querySelector('#pricing-update-styles')) {
+            var style = document.createElement('style');
+            style.id = 'pricing-update-styles';
+            style.textContent = '.pricing-terms{max-width:970px;margin:0 auto 24px;color:#786c69;font-size:10.5px;font-style:italic;line-height:1.7;text-align:center}@media (min-width:761px){.pricing-options{max-width:1180px;grid-template-columns:repeat(3,minmax(0,1fr))}.pricing-card{padding:36px 30px}}';
+            document.head.appendChild(style);
+          }
+
+          return true;
+        }
+
+        var timer = setInterval(function () {
+          attempts += 1;
+          if (updatePricing() || attempts > 100) clearInterval(timer);
+        }, 50);
+      })();
+    </script>
+  </body>
 </html>
