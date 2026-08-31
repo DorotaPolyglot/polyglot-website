@@ -113,11 +113,6 @@
               label: 'Zajęcia w parze', duration: '55 min', price: '80 zł', suffix: ' / osoba / spotkanie',
               description: 'Zajęcia online dla dwóch osób na podobnym poziomie zaawansowania. Dużo praktycznej komunikacji, wspólnej pracy i możliwość nauki z wybraną przez siebie osobą.',
               button: 'ZAPYTAJ O ZAJĘCIA W PARZE', featured: false
-            },
-            {
-              label: 'Pierwsze spotkanie', duration: '30 min', price: '60 zł', suffix: ' / spotkanie',
-              description: 'Pierwsze spotkanie ma formę krótkiej konsultacji. Poznamy Twój poziom, potrzeby i cele, porozmawiamy o sposobie prowadzenia zajęć oraz dobierzemy odpowiednie materiały i plan nauki.',
-              button: 'UMÓW PIERWSZE SPOTKANIE', featured: false
             }
           ];
 
@@ -127,18 +122,30 @@
           var additional = document.querySelector('.pricing-additional');
           if (additional) additional.remove();
 
+          var note = document.querySelector('.pricing-note');
+          if (note) {
+            var noteCopy = note.querySelector('div');
+            if (noteCopy) {
+              noteCopy.innerHTML =
+                '<p class="eyebrow">PIERWSZE SPOTKANIE</p>' +
+                '<h2>60 zł / 30 min</h2>' +
+                '<p>Pierwsze spotkanie ma formę krótkiej konsultacji. Poznamy Twój poziom, potrzeby i cele, porozmawiamy o sposobie prowadzenia zajęć oraz dobierzemy odpowiednie materiały i plan nauki.</p>';
+            }
+            var noteButton = note.querySelector('.button span');
+            if (noteButton) noteButton.textContent = 'UMÓW PIERWSZE SPOTKANIE';
+          }
+
           if (!document.querySelector('.pricing-terms')) {
             var terms = document.createElement('p');
             terms.className = 'pricing-terms';
             terms.textContent = 'W przypadku kursów realizowanych w ramach indywidualnie ustalonych pakietów lub finansowanych przez firmy warunki mogą być ustalane odrębnie.';
-            var note = document.querySelector('.pricing-note');
-            if (note) note.parentNode.insertBefore(terms, note);
+            if (note) note.insertAdjacentElement('afterend', terms);
           }
 
           if (!document.querySelector('#pricing-update-styles')) {
             var style = document.createElement('style');
             style.id = 'pricing-update-styles';
-            style.textContent = '.pricing-terms{max-width:970px;margin:0 auto 24px;color:#786c69;font-size:10.5px;font-style:italic;line-height:1.7;text-align:center}@media (min-width:761px){.pricing-options{max-width:1180px;grid-template-columns:repeat(3,minmax(0,1fr))}.pricing-card{padding:36px 30px}}';
+            style.textContent = '.pricing-terms{max-width:820px;margin:18px auto 0;color:#786c69;font-size:10.5px;font-style:italic;line-height:1.7;text-align:center}';
             document.head.appendChild(style);
           }
 
