@@ -612,5 +612,23 @@ window.addEventListener('message', function (event) {
 </script>
 <!-- /Polyglot: Jak zacząć + informacja o pierwszym spotkaniu -->
 
+
+<!-- Polyglot: główny nagłówek -->
+<script>
+(function () {
+  function updateHeroHeading() {
+    const heading = document.querySelector('#main-content h1');
+    if (!heading) return false;
+    heading.textContent = 'Angielski dopasowany do Ciebie.';
+    return true;
+  }
+
+  let attempts = 0;
+  const timer = setInterval(function () {
+    attempts += 1;
+    if (updateHeroHeading() || attempts > 100) clearInterval(timer);
+  }, 60);
+})();
+</script>
 </body>
 </html>
