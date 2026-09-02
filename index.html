@@ -614,19 +614,30 @@ window.addEventListener('message', function (event) {
 
 
 <!-- Polyglot: główny nagłówek -->
+<style>
+@media (max-width: 780px) {
+  .hero-copy h1 {
+    font-size: clamp(44px, 7vw, 54px) !important;
+    line-height: 0.98 !important;
+    letter-spacing: -1.5px !important;
+  }
+}
+</style>
 <script>
 (function () {
-  function updateHeroHeading() {
+  function updateHeroContent() {
     const heading = document.querySelector('#main-content h1');
-    if (!heading) return false;
+    const lead = document.querySelector('.hero-lead');
+    if (!heading || !lead) return false;
     heading.textContent = 'Nowe możliwości zaczynają się od rozmowy.';
+    lead.textContent = 'Lekcje języka angielskiego online dla dorosłych i młodzieży, dopasowane do Twoich celów, tempa i sposobu nauki. Bez presji i sztywnych schematów.';
     return true;
   }
 
   let attempts = 0;
   const timer = setInterval(function () {
     attempts += 1;
-    if (updateHeroHeading() || attempts > 100) clearInterval(timer);
+    if (updateHeroContent() || attempts > 100) clearInterval(timer);
   }, 60);
 })();
 </script>
