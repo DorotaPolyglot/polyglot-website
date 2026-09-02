@@ -568,7 +568,7 @@ window.addEventListener('message', function (event) {
           '<p class="section-intro">Prosty proces, bez presji i bez zobowiązań do kontynuowania nauki.</p>' +
         '</header>' +
         '<ol class="polyglot-start-steps">' +
-          '<li><span class="polyglot-start-number">01</span><h3>Umów pierwsze spotkanie</h3><p>Wybierz dogodny termin 30-minutowej konsultacji online.<br><span class="polyglot-start-price">Koszt: 60 zł</span></p></li>' +
+          '<li><span class="polyglot-start-number">01</span><h3>Umów pierwsze spotkanie</h3><p>Wybierz dogodny termin bezpłatnej, 20–30-minutowej konsultacji online.<br><span class="polyglot-start-price">Bezpłatnie</span></p></li>' +
           '<li><span class="polyglot-start-number">02</span><h3>Poznajmy się</h3><p>Porozmawiamy o Twoim angielskim, celach i oczekiwaniach.</p></li>' +
           '<li><span class="polyglot-start-number">03</span><h3>Otrzymasz propozycję nauki</h3><p>Podpowiem, na czym warto się skupić i jaki format zajęć wybrać.</p></li>' +
           '<li><span class="polyglot-start-number">04</span><h3>Zaczynamy</h3><p>Jeśli zdecydujesz się na współpracę, ustalimy stały termin zajęć.</p></li>' +
@@ -582,7 +582,7 @@ window.addEventListener('message', function (event) {
     });
     if (meetingButton) {
       var answer = meetingButton.closest('.faq-item').querySelector('.faq-answer p');
-      if (answer) answer.textContent = 'Pierwsze spotkanie trwa 30 minut, kosztuje 60 zł i odbywa się online. Porozmawiamy o Twoich celach i oczekiwaniach, krótko sprawdzę Twój poziom, pokażę materiały i zaproponuję odpowiedni kierunek nauki. To nie jest egzamin — nie musisz się specjalnie przygotowywać. Po spotkaniu samodzielnie zdecydujesz, czy chcesz rozpocząć regularne zajęcia.';
+      if (answer) answer.textContent = 'Pierwsze spotkanie trwa 20–30 minut, jest bezpłatne i odbywa się online. Porozmawiamy o Twoich celach i oczekiwaniach, krótko sprawdzę Twój poziom, pokażę materiały i zaproponuję odpowiedni kierunek nauki. To nie jest egzamin — nie musisz się specjalnie przygotowywać. Po spotkaniu samodzielnie zdecydujesz, czy chcesz rozpocząć regularne zajęcia.';
     }
 
     if (!nav.querySelector('a[href="#jak-zaczac"]')) {
@@ -616,14 +616,14 @@ window.addEventListener('message', function (event) {
 <!-- Polyglot: główny nagłówek -->
 <style>
 .hero-copy h1 {
-  font-size: clamp(42px, 3.4vw, 58px) !important;
+  font-size: clamp(36px, 3vw, 50px) !important;
   line-height: 0.98 !important;
   letter-spacing: -1.5px !important;
 }
 
 @media (max-width: 780px) {
   .hero-copy h1 {
-    font-size: clamp(44px, 7vw, 54px) !important;
+    font-size: clamp(38px, 6.5vw, 48px) !important;
     line-height: 0.98 !important;
     letter-spacing: -1.5px !important;
   }
